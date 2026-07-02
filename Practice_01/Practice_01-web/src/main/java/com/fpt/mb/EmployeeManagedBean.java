@@ -50,6 +50,11 @@ public class EmployeeManagedBean implements Serializable, Validator<Object> {
 
     public String login() {
         if (employeeFacade.checkLogin(username, password)) {
+            // Lưu username vào session để AuthFilter kiểm tra
+            FacesContext.getCurrentInstance()
+                        .getExternalContext()
+                        .getSessionMap()
+                        .put("loggedInUser", username);
             showInfoMessage("Login successfully.");
             return "view?faces-redirect=true";
         }
