@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                template="./WEB-INF/layout/account-layout.xhtml">
+
+    <ui:define name="title">Accounts | Account Portal</ui:define>
+
+    <ui:define name="content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="mb-0">Accounts</h3>
+            <h:form>
+                <h:commandButton value="Create new account"
+                                 action="#{accountBean.create}"
+                                 styleClass="btn btn-primary"/>
+            </h:form>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Account list: #{accountBean.accounts.size()} records
+            </div>
+            <div class="card-body p-0">
+                <h:panelGroup rendered="#{not empty accountBean.accounts}">
+                    <div class="table-responsive">
+                        <h:dataTable value="#{accountBean.accounts}"
+                                     var="item"
+                                     styleClass="table table-striped table-hover mb-0">
+                            <h:column>
+                                <f:facet name="header">Id</f:facet>
+                                #{item.accId}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Username</f:facet>
+                                #{item.username}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Password</f:facet>
+                                #{item.password}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Role</f:facet>
+                                #{item.role}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Image</f:facet>
+                                <h:graphicImage value="images/accs/#{item.image}"
+                                                width="80"
+                                                rendered="#{not empty item.image}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{empty accountBean.accounts}">
+                    <div class="p-4 text-center text-muted">
+                        No accounts yet.
+                    </div>
+                </h:panelGroup>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
