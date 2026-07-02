@@ -1,0 +1,4 @@
+com\fptentity\Employee.class
+com\fpt\sb\EmployeeFacade.class
+com\fpt\sb\EmployeeFacadeLocal.class
+com\fpt\sb\AbstractFacade.class
