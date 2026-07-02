@@ -1,0 +1,24 @@
+# Maven build output
+target/
+
+# NetBeans
+nbproject/private/
+nb-configuration.xml
+build/
+dist/
+nbbuild/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Log files
+*.log
