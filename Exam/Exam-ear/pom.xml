@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.fpt</groupId>
+        <artifactId>Exam</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>Exam-ear</artifactId>
+    <packaging>ear</packaging>
+    <name>Exam-ear</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fpt</groupId>
+            <artifactId>Exam-ejb</artifactId>
+            <version>${project.version}</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>com.fpt</groupId>
+            <artifactId>Exam-web</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <version>8</version>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <modules>
+                        <ejbModule>
+                            <groupId>com.fpt</groupId>
+                            <artifactId>Exam-ejb</artifactId>
+                        </ejbModule>
+                        <webModule>
+                            <groupId>com.fpt</groupId>
+                            <artifactId>Exam-web</artifactId>
+                            <contextRoot>/Exam-web</contextRoot>
+                        </webModule>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
