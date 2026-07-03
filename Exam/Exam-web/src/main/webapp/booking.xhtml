@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                template="./WEB-INF/layout/flight-layout.xhtml">
+
+    <ui:define name="title">Booking | Flight Booking</ui:define>
+
+    <ui:define name="navRight">
+        <span class="navbar-text text-white me-3">Welcome, #{flightBean.customerName}</span>
+        <h:form>
+            <h:commandButton value="Logout"
+                             action="#{flightBean.logout}"
+                             styleClass="btn btn-outline-light btn-sm"/>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+
+        <!-- Available Flights -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <strong>Available Flights</strong>
+            </div>
+            <div class="card-body p-0">
+                <h:panelGroup rendered="#{not empty flightBean.flights}">
+                    <div class="table-responsive">
+                        <h:dataTable value="#{flightBean.flights}"
+                                     var="f"
+                                     styleClass="table table-striped table-hover mb-0">
+                            <h:column>
+                                <f:facet name="header">Flight No</f:facet>
+                                #{f.flightNo}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Departure</f:facet>
+                                #{f.departure}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Destination</f:facet>
+                                #{f.destination}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Departure Time</f:facet>
+                                <h:outputText value="#{f.departureTime}">
+                                    <f:convertDateTime pattern="dd-MM-yyyy HH:mm" type="localDateTime"/>
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Available Seats</f:facet>
+                                #{f.availableSeats}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Price ($)</f:facet>
+                                #{f.price}
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{empty flightBean.flights}">
+                    <div class="p-4 text-center text-muted">No flights found.</div>
+                </h:panelGroup>
+            </div>
+        </div>
+
+        <!-- Book Your Ticket -->
+        <div class="card">
+            <div class="card-header">
+                <strong>Book Your Ticket</strong>
+            </div>
+            <div class="card-body">
+                <h:form id="bookingForm">
+                    <div class="mb-3">
+                        <h:outputLabel for="selectedFlightNo" value="Selected Flight No" styleClass="form-label"/>
+                        <h:inputText id="selectedFlightNo"
+                                     value="#{flightBean.selectedFlightNo}"
+                                     styleClass="form-control"
+                                     required="true"
+                                     requiredMessage="Please enter a flight number."/>
+                        <h:message for="selectedFlightNo" styleClass="text-danger small d-block mt-1"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <h:outputLabel for="seatsToBook" value="Seats to Book" styleClass="form-label"/>
+                        <h:inputText id="seatsToBook"
+                                     value="#{flightBean.seatsToBook}"
+                                     styleClass="form-control"
+                                     required="true"
+                                     requiredMessage="Please enter number of seats."
+                                     converterMessage="Seats must be a whole number.">
+                            <f:validateLongRange minimum="1"/>
+                        </h:inputText>
+                        <h:message for="seatsToBook" styleClass="text-danger small d-block mt-1"/>
+                    </div>
+
+                    <h:commandButton value="Book Ticket"
+                                     action="#{flightBean.bookTicket}"
+                                     styleClass="btn btn-success"/>
+                </h:form>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

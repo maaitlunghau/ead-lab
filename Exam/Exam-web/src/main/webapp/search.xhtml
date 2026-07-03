@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE composition>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                template="./WEB-INF/layout/flight-layout.xhtml">
+
+    <ui:define name="title">Search Flights | Flight Booking</ui:define>
+
+    <ui:define name="navRight"/>
+
+    <ui:define name="content">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">Search Flights</h4>
+                    </div>
+                    <div class="card-body">
+                        <h:form id="searchForm">
+                            <div class="mb-3">
+                                <h:outputLabel for="customerName" value="Customer Name" styleClass="form-label"/>
+                                <h:inputText id="customerName"
+                                             value="#{flightBean.customerName}"
+                                             styleClass="form-control"
+                                             required="true"
+                                             requiredMessage="Customer name is required."/>
+                                <h:message for="customerName" styleClass="text-danger small d-block mt-1"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <h:outputLabel for="departure" value="Departure" styleClass="form-label"/>
+                                <h:inputText id="departure"
+                                             value="#{flightBean.departure}"
+                                             styleClass="form-control"
+                                             required="true"
+                                             requiredMessage="Departure is required."/>
+                                <h:message for="departure" styleClass="text-danger small d-block mt-1"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <h:outputLabel for="destination" value="Destination" styleClass="form-label"/>
+                                <h:inputText id="destination"
+                                             value="#{flightBean.destination}"
+                                             styleClass="form-control"
+                                             required="true"
+                                             requiredMessage="Destination is required."/>
+                                <h:message for="destination" styleClass="text-danger small d-block mt-1"/>
+                            </div>
+
+                            <h:commandButton value="Search"
+                                             action="#{flightBean.search}"
+                                             styleClass="btn btn-primary w-100"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
