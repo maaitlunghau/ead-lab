@@ -1,6 +1,3 @@
--- EAD Exam - Set 13
--- Database script for Microsoft SQL Server
-
 USE master;
 GO
 
@@ -13,7 +10,6 @@ GO
 USE FlightDB;
 GO
 
--- Drop tables if exist (order matters due to FK)
 IF OBJECT_ID(N'dbo.Booking', N'U') IS NOT NULL DROP TABLE dbo.Booking;
 IF OBJECT_ID(N'dbo.Flight',  N'U') IS NOT NULL DROP TABLE dbo.Flight;
 GO
@@ -45,7 +41,6 @@ CREATE TABLE dbo.Booking
 );
 GO
 
--- Seed: at least 3 flights
 INSERT INTO dbo.Flight (FlightNo, Departure, Destination, DepartureTime, AvailableSeats, Price)
 VALUES
     ('VN-102', N'Ha Noi', N'Ho Chi Minh', '2026-06-28 06:00:00', 45,  120.00),
@@ -54,7 +49,6 @@ VALUES
     ('VN-410', N'Da Nang', N'Ho Chi Minh','2026-06-29 11:00:00', 20,   85.00);
 GO
 
--- Seed: at least 3 bookings
 INSERT INTO dbo.Booking (FlightNo, CustomerName, SeatsBooked, TotalPrice, BookingDate)
 VALUES
     ('VN-102', N'Nguyen Van A', 2, 240.00, '2026-06-20 10:00:00'),
